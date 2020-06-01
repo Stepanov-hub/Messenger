@@ -4,6 +4,7 @@
 #include <QObject>
 #include <QTcpSocket>
 #include <QDebug>
+#include <QTime>
 
 #include <QDataStream>
 
@@ -32,7 +33,7 @@ signals:
 	void disconnected();
 	void loggedIn();
 	void loginError(const QString &reason);
-	void messageReceived(QString sender, QString message);
+	void messageReceived(QString sender, QString message, QString time);
 	void userJoined(const QString userName);
 	void userLeft(const QString userName);
 

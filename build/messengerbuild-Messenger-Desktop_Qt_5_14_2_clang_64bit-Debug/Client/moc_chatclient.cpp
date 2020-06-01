@@ -22,8 +22,8 @@ QT_BEGIN_MOC_NAMESPACE
 QT_WARNING_PUSH
 QT_WARNING_DISABLE_DEPRECATED
 struct qt_meta_stringdata_ChatClient_t {
-    QByteArrayData data[14];
-    char stringdata0[140];
+    QByteArrayData data[15];
+    char stringdata0[145];
 };
 #define QT_MOC_LITERAL(idx, ofs, len) \
     Q_STATIC_BYTE_ARRAY_DATA_HEADER_INITIALIZER_WITH_OFFSET(len, \
@@ -42,15 +42,16 @@ QT_MOC_LITERAL(6, 61, 6), // "reason"
 QT_MOC_LITERAL(7, 68, 15), // "messageReceived"
 QT_MOC_LITERAL(8, 84, 6), // "sender"
 QT_MOC_LITERAL(9, 91, 7), // "message"
-QT_MOC_LITERAL(10, 99, 10), // "userJoined"
-QT_MOC_LITERAL(11, 110, 8), // "userName"
-QT_MOC_LITERAL(12, 119, 8), // "userLeft"
-QT_MOC_LITERAL(13, 128, 11) // "onReadyRead"
+QT_MOC_LITERAL(10, 99, 4), // "time"
+QT_MOC_LITERAL(11, 104, 10), // "userJoined"
+QT_MOC_LITERAL(12, 115, 8), // "userName"
+QT_MOC_LITERAL(13, 124, 8), // "userLeft"
+QT_MOC_LITERAL(14, 133, 11) // "onReadyRead"
 
     },
     "ChatClient\0connectedToHost\0\0disconnected\0"
     "loggedIn\0loginError\0reason\0messageReceived\0"
-    "sender\0message\0userJoined\0userName\0"
+    "sender\0message\0time\0userJoined\0userName\0"
     "userLeft\0onReadyRead"
 };
 #undef QT_MOC_LITERAL
@@ -73,21 +74,21 @@ static const uint qt_meta_data_ChatClient[] = {
        3,    0,   55,    2, 0x06 /* Public */,
        4,    0,   56,    2, 0x06 /* Public */,
        5,    1,   57,    2, 0x06 /* Public */,
-       7,    2,   60,    2, 0x06 /* Public */,
-      10,    1,   65,    2, 0x06 /* Public */,
-      12,    1,   68,    2, 0x06 /* Public */,
+       7,    3,   60,    2, 0x06 /* Public */,
+      11,    1,   67,    2, 0x06 /* Public */,
+      13,    1,   70,    2, 0x06 /* Public */,
 
  // slots: name, argc, parameters, tag, flags
-      13,    0,   71,    2, 0x0a /* Public */,
+      14,    0,   73,    2, 0x0a /* Public */,
 
  // signals: parameters
     QMetaType::Void,
     QMetaType::Void,
     QMetaType::Void,
     QMetaType::Void, QMetaType::QString,    6,
-    QMetaType::Void, QMetaType::QString, QMetaType::QString,    8,    9,
-    QMetaType::Void, QMetaType::QString,   11,
-    QMetaType::Void, QMetaType::QString,   11,
+    QMetaType::Void, QMetaType::QString, QMetaType::QString, QMetaType::QString,    8,    9,   10,
+    QMetaType::Void, QMetaType::QString,   12,
+    QMetaType::Void, QMetaType::QString,   12,
 
  // slots: parameters
     QMetaType::Void,
@@ -105,7 +106,7 @@ void ChatClient::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, 
         case 1: _t->disconnected(); break;
         case 2: _t->loggedIn(); break;
         case 3: _t->loginError((*reinterpret_cast< const QString(*)>(_a[1]))); break;
-        case 4: _t->messageReceived((*reinterpret_cast< QString(*)>(_a[1])),(*reinterpret_cast< QString(*)>(_a[2]))); break;
+        case 4: _t->messageReceived((*reinterpret_cast< QString(*)>(_a[1])),(*reinterpret_cast< QString(*)>(_a[2])),(*reinterpret_cast< QString(*)>(_a[3]))); break;
         case 5: _t->userJoined((*reinterpret_cast< const QString(*)>(_a[1]))); break;
         case 6: _t->userLeft((*reinterpret_cast< const QString(*)>(_a[1]))); break;
         case 7: _t->onReadyRead(); break;
@@ -142,7 +143,7 @@ void ChatClient::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, 
             }
         }
         {
-            using _t = void (ChatClient::*)(QString , QString );
+            using _t = void (ChatClient::*)(QString , QString , QString );
             if (*reinterpret_cast<_t *>(_a[1]) == static_cast<_t>(&ChatClient::messageReceived)) {
                 *result = 4;
                 return;
@@ -231,9 +232,9 @@ void ChatClient::loginError(const QString & _t1)
 }
 
 // SIGNAL 4
-void ChatClient::messageReceived(QString _t1, QString _t2)
+void ChatClient::messageReceived(QString _t1, QString _t2, QString _t3)
 {
-    void *_a[] = { nullptr, const_cast<void*>(reinterpret_cast<const void*>(std::addressof(_t1))), const_cast<void*>(reinterpret_cast<const void*>(std::addressof(_t2))) };
+    void *_a[] = { nullptr, const_cast<void*>(reinterpret_cast<const void*>(std::addressof(_t1))), const_cast<void*>(reinterpret_cast<const void*>(std::addressof(_t2))), const_cast<void*>(reinterpret_cast<const void*>(std::addressof(_t3))) };
     QMetaObject::activate(this, &staticMetaObject, 4, _a);
 }
 

@@ -40,9 +40,11 @@ void ChatClient::sendMessage(const QString &text){
 	QDataStream clientStream(clientSocket);
 
 	QJsonObject message;
+	QString time = QTime::currentTime().toString("hh:mm");
 
 	message["type"] = "message";
 	message["text"] = text;
+	message["time"] = time;
 
 	clientStream << QJsonDocument(message).toJson();
 
@@ -117,10 +119,16 @@ void ChatClient::jsonReceived(const QJsonObject &docObj)
 		if(senderValue.isNull() || !textValue.isString()){
 			return;
 		}
+
+		const QJsonValue timeValue = docObj.value("time");
+		if(timeValue.isNull() || !timeValue.isString()){
+			return;
+		}
+		QString time = timeValue.toString();
 		QString text = textValue.toString();
 		QString sender = senderValue.toString();
 
-		emit messageReceived(sender, text);
+		emit messageReceived(sender, text, time);
 
 	}
 	else if(typeValue.toString() == "newUser"){

@@ -14,8 +14,11 @@ ChatWindow::ChatWindow(QWidget *parent)
 
 
 	chatModel->insertColumn(0);
+	ui->chatView->setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
 
 	ui->chatView->setModel(chatModel);
+	ui->chatView->setEditTriggers(QAbstractItemView::NoEditTriggers);
+	ui->chatView->setSelectionMode(QAbstractItemView::NoSelection);
 
 
 	connect(client, &ChatClient::connectedToHost, this, &ChatWindow::connectedToServer);
@@ -86,10 +89,20 @@ void ChatWindow::loggedIn(){
 	ui->messageEdit->setEnabled(true);
 	ui->chatView->setEnabled(true);
 
+	int newRow = chatModel->rowCount();
+	chatModel->insertRow(newRow);
+	chatModel->setData(chatModel->index(newRow, 0), tr("Welcome to Chat!"));
+	QFont boldFont;
+	chatModel->setData(chatModel->index(newRow, 0), boldFont, Qt::FontRole);
+	chatModel->setData(chatModel->index(newRow, 0), Qt::AlignCenter, Qt::TextAlignmentRole);
+	chatModel->setData(chatModel->index(newRow, 0), QBrush(Qt::blue), Qt::ForegroundRole);
+	ui->chatView->scrollToBottom();
+
+
 }
 
 
-void ChatWindow::messageReceived(const QString &sender, const QString &text){
+void ChatWindow::messageReceived(const QString &sender, const QString &text, const QString &time){
 
 	int newRow = chatModel->rowCount();
 
@@ -98,6 +111,7 @@ void ChatWindow::messageReceived(const QString &sender, const QString &text){
 
 		QFont boldFont;
 		boldFont.setBold(true);
+		boldFont.setPointSize(13);
 
 		chatModel->insertRows(newRow, 2);
 
@@ -106,15 +120,27 @@ void ChatWindow::messageReceived(const QString &sender, const QString &text){
 		chatModel->setData(chatModel->index(newRow, 0), int(Qt::AlignLeft | Qt::AlignVCenter), Qt::TextAlignmentRole);
 
 		chatModel->setData(chatModel->index(newRow, 0), boldFont, Qt::FontRole);
-
 		++newRow;
+
+
 	}
 	else{
 		chatModel->insertRow(newRow);
 	}
 
+	if (time != lastMinuteMessage){
+		lastMinuteMessage = time;
+		QFont boldFont;
+		boldFont.setPointSize(6);
+		chatModel->setData(chatModel->index(newRow, 0), time);
+		chatModel->setData(chatModel->index(newRow, 0), boldFont, Qt::FontRole);
+		chatModel->setData(chatModel->index(newRow, 0), int(Qt::AlignLeft | Qt::AlignBottom), Qt::TextAlignmentRole);
+		newRow++;
+		chatModel->insertRow(newRow);
+	}
+	//chatModel->insertRow(newRow);
 	chatModel->setData(chatModel->index(newRow, 0), text);
-	chatModel->setData(chatModel->index(newRow, 0), int(Qt::AlignLeft | Qt::AlignVCenter), Qt::TextAlignmentRole);
+	chatModel->setData(chatModel->index(newRow, 0), int(Qt::AlignLeft | Qt::AlignTop), Qt::TextAlignmentRole);
 
 	ui->chatView->scrollToBottom();
 
@@ -159,13 +185,13 @@ void ChatWindow::userJoined(const QString &userName){
 	chatModel->insertRow(newRow);
 	chatModel->setData(chatModel->index(newRow, 0), tr("%1 Joined the chat").arg(userName));
 
-	 chatModel->setData(chatModel->index(newRow, 0), Qt::AlignCenter, Qt::TextAlignmentRole);
+	chatModel->setData(chatModel->index(newRow, 0), Qt::AlignCenter, Qt::TextAlignmentRole);
 
-	 chatModel->setData(chatModel->index(newRow, 0), QBrush(Qt::blue), Qt::ForegroundRole);
+	chatModel->setData(chatModel->index(newRow, 0), QBrush(Qt::blue), Qt::ForegroundRole);
 
-	 ui->chatView->scrollToBottom();
+	ui->chatView->scrollToBottom();
 
-	 lastUserName.clear();
+	lastUserName.clear();
 
 
 

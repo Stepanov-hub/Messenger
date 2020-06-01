@@ -35,7 +35,7 @@ public slots:
 	void connectedToServer();
 
 
-	void messageReceived(const QString &sender, const QString &text);
+	void messageReceived(const QString &sender, const QString &text, const QString &time);
 	void sendMessage();
 	void disconnectedFromServer();
 	void userJoined(const QString &userName);
@@ -49,6 +49,7 @@ private:
 	Ui::ChatWindow *ui;
 
 	QString lastUserName;
+	QString lastMinuteMessage;
 
 	QStandardItemModel *chatModel;
 	ChatClient *client;

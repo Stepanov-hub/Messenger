@@ -22,8 +22,8 @@ QT_BEGIN_MOC_NAMESPACE
 QT_WARNING_PUSH
 QT_WARNING_DISABLE_DEPRECATED
 struct qt_meta_stringdata_ChatWindow_t {
-    QByteArrayData data[16];
-    char stringdata0[181];
+    QByteArrayData data[17];
+    char stringdata0[186];
 };
 #define QT_MOC_LITERAL(idx, ofs, len) \
     Q_STATIC_BYTE_ARRAY_DATA_HEADER_INITIALIZER_WITH_OFFSET(len, \
@@ -41,20 +41,22 @@ QT_MOC_LITERAL(5, 52, 17), // "connectedToServer"
 QT_MOC_LITERAL(6, 70, 15), // "messageReceived"
 QT_MOC_LITERAL(7, 86, 6), // "sender"
 QT_MOC_LITERAL(8, 93, 4), // "text"
-QT_MOC_LITERAL(9, 98, 11), // "sendMessage"
-QT_MOC_LITERAL(10, 110, 22), // "disconnectedFromServer"
-QT_MOC_LITERAL(11, 133, 10), // "userJoined"
-QT_MOC_LITERAL(12, 144, 8), // "userLeft"
-QT_MOC_LITERAL(13, 153, 8), // "loggedIn"
-QT_MOC_LITERAL(14, 162, 11), // "loginFailed"
-QT_MOC_LITERAL(15, 174, 6) // "reason"
+QT_MOC_LITERAL(9, 98, 4), // "time"
+QT_MOC_LITERAL(10, 103, 11), // "sendMessage"
+QT_MOC_LITERAL(11, 115, 22), // "disconnectedFromServer"
+QT_MOC_LITERAL(12, 138, 10), // "userJoined"
+QT_MOC_LITERAL(13, 149, 8), // "userLeft"
+QT_MOC_LITERAL(14, 158, 8), // "loggedIn"
+QT_MOC_LITERAL(15, 167, 11), // "loginFailed"
+QT_MOC_LITERAL(16, 179, 6) // "reason"
 
     },
     "ChatWindow\0attemptLogin\0\0userName\0"
     "attemptConnection\0connectedToServer\0"
-    "messageReceived\0sender\0text\0sendMessage\0"
-    "disconnectedFromServer\0userJoined\0"
-    "userLeft\0loggedIn\0loginFailed\0reason"
+    "messageReceived\0sender\0text\0time\0"
+    "sendMessage\0disconnectedFromServer\0"
+    "userJoined\0userLeft\0loggedIn\0loginFailed\0"
+    "reason"
 };
 #undef QT_MOC_LITERAL
 
@@ -75,25 +77,25 @@ static const uint qt_meta_data_ChatWindow[] = {
        1,    1,   64,    2, 0x0a /* Public */,
        4,    0,   67,    2, 0x0a /* Public */,
        5,    0,   68,    2, 0x0a /* Public */,
-       6,    2,   69,    2, 0x0a /* Public */,
-       9,    0,   74,    2, 0x0a /* Public */,
-      10,    0,   75,    2, 0x0a /* Public */,
-      11,    1,   76,    2, 0x0a /* Public */,
-      12,    1,   79,    2, 0x0a /* Public */,
-      13,    0,   82,    2, 0x0a /* Public */,
-      14,    1,   83,    2, 0x0a /* Public */,
+       6,    3,   69,    2, 0x0a /* Public */,
+      10,    0,   76,    2, 0x0a /* Public */,
+      11,    0,   77,    2, 0x0a /* Public */,
+      12,    1,   78,    2, 0x0a /* Public */,
+      13,    1,   81,    2, 0x0a /* Public */,
+      14,    0,   84,    2, 0x0a /* Public */,
+      15,    1,   85,    2, 0x0a /* Public */,
 
  // slots: parameters
     QMetaType::Void, QMetaType::QString,    3,
     QMetaType::Void,
     QMetaType::Void,
-    QMetaType::Void, QMetaType::QString, QMetaType::QString,    7,    8,
+    QMetaType::Void, QMetaType::QString, QMetaType::QString, QMetaType::QString,    7,    8,    9,
     QMetaType::Void,
     QMetaType::Void,
     QMetaType::Void, QMetaType::QString,    3,
     QMetaType::Void, QMetaType::QString,    3,
     QMetaType::Void,
-    QMetaType::Void, QMetaType::QString,   15,
+    QMetaType::Void, QMetaType::QString,   16,
 
        0        // eod
 };
@@ -107,7 +109,7 @@ void ChatWindow::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, 
         case 0: _t->attemptLogin((*reinterpret_cast< const QString(*)>(_a[1]))); break;
         case 1: _t->attemptConnection(); break;
         case 2: _t->connectedToServer(); break;
-        case 3: _t->messageReceived((*reinterpret_cast< const QString(*)>(_a[1])),(*reinterpret_cast< const QString(*)>(_a[2]))); break;
+        case 3: _t->messageReceived((*reinterpret_cast< const QString(*)>(_a[1])),(*reinterpret_cast< const QString(*)>(_a[2])),(*reinterpret_cast< const QString(*)>(_a[3]))); break;
         case 4: _t->sendMessage(); break;
         case 5: _t->disconnectedFromServer(); break;
         case 6: _t->userJoined((*reinterpret_cast< const QString(*)>(_a[1]))); break;

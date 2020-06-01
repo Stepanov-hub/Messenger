@@ -112,10 +112,17 @@ void ChatServer::JsonFromLoggedIn(Worker *sender, const QJsonObject jsonObj){
 
 	QString text = textValue.toString();
 
+	QJsonValue timeValue = jsonObj.value("time");
+	if (timeValue.isNull() || !timeValue.isString())
+		return;
+
+	QString time = timeValue.toString();
+
 	QJsonObject message;
 	message["type"] = "message";
 	message["text"] = text;
 	message["sender"] = sender->UserName();
+	message["time"] = time;
 
 	Broadcast(message, sender);
 }

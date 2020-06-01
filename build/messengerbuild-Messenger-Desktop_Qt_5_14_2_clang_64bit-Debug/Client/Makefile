@@ -705,6 +705,8 @@ moc_chatclient.cpp: ../../../Messenger/Client/chatclient.h \
 		/Users/kremenevskiy/Apps/Qt/5.14.2/clang_64/lib/QtNetwork.framework/Headers/qtcpsocket.h \
 		/Users/kremenevskiy/Apps/Qt/5.14.2/clang_64/lib/QtCore.framework/Headers/QDebug \
 		/Users/kremenevskiy/Apps/Qt/5.14.2/clang_64/lib/QtCore.framework/Headers/qdebug.h \
+		/Users/kremenevskiy/Apps/Qt/5.14.2/clang_64/lib/QtCore.framework/Headers/QTime \
+		/Users/kremenevskiy/Apps/Qt/5.14.2/clang_64/lib/QtCore.framework/Headers/qdatetime.h \
 		/Users/kremenevskiy/Apps/Qt/5.14.2/clang_64/lib/QtCore.framework/Headers/QDataStream \
 		/Users/kremenevskiy/Apps/Qt/5.14.2/clang_64/lib/QtCore.framework/Headers/qdatastream.h \
 		/Users/kremenevskiy/Apps/Qt/5.14.2/clang_64/lib/QtCore.framework/Headers/QJsonDocument \
@@ -741,6 +743,8 @@ moc_chatwindow.cpp: ../../../Messenger/Client/chatwindow.h \
 		../../../Messenger/Client/chatclient.h \
 		/Users/kremenevskiy/Apps/Qt/5.14.2/clang_64/lib/QtCore.framework/Headers/QObject \
 		/Users/kremenevskiy/Apps/Qt/5.14.2/clang_64/lib/QtCore.framework/Headers/qobject.h \
+		/Users/kremenevskiy/Apps/Qt/5.14.2/clang_64/lib/QtCore.framework/Headers/QTime \
+		/Users/kremenevskiy/Apps/Qt/5.14.2/clang_64/lib/QtCore.framework/Headers/qdatetime.h \
 		/Users/kremenevskiy/Apps/Qt/5.14.2/clang_64/lib/QtCore.framework/Headers/QDataStream \
 		/Users/kremenevskiy/Apps/Qt/5.14.2/clang_64/lib/QtCore.framework/Headers/qdatastream.h \
 		moc_predefs.h \
@@ -777,6 +781,8 @@ chatclient.o: ../../../Messenger/Client/chatclient.cpp ../../../Messenger/Client
 		/Users/kremenevskiy/Apps/Qt/5.14.2/clang_64/lib/QtNetwork.framework/Headers/qtcpsocket.h \
 		/Users/kremenevskiy/Apps/Qt/5.14.2/clang_64/lib/QtCore.framework/Headers/QDebug \
 		/Users/kremenevskiy/Apps/Qt/5.14.2/clang_64/lib/QtCore.framework/Headers/qdebug.h \
+		/Users/kremenevskiy/Apps/Qt/5.14.2/clang_64/lib/QtCore.framework/Headers/QTime \
+		/Users/kremenevskiy/Apps/Qt/5.14.2/clang_64/lib/QtCore.framework/Headers/qdatetime.h \
 		/Users/kremenevskiy/Apps/Qt/5.14.2/clang_64/lib/QtCore.framework/Headers/QDataStream \
 		/Users/kremenevskiy/Apps/Qt/5.14.2/clang_64/lib/QtCore.framework/Headers/qdatastream.h \
 		/Users/kremenevskiy/Apps/Qt/5.14.2/clang_64/lib/QtCore.framework/Headers/QJsonDocument \
@@ -811,6 +817,8 @@ main.o: ../../../Messenger/Client/main.cpp ../../../Messenger/Client/chatwindow.
 		../../../Messenger/Client/chatclient.h \
 		/Users/kremenevskiy/Apps/Qt/5.14.2/clang_64/lib/QtCore.framework/Headers/QObject \
 		/Users/kremenevskiy/Apps/Qt/5.14.2/clang_64/lib/QtCore.framework/Headers/qobject.h \
+		/Users/kremenevskiy/Apps/Qt/5.14.2/clang_64/lib/QtCore.framework/Headers/QTime \
+		/Users/kremenevskiy/Apps/Qt/5.14.2/clang_64/lib/QtCore.framework/Headers/qdatetime.h \
 		/Users/kremenevskiy/Apps/Qt/5.14.2/clang_64/lib/QtCore.framework/Headers/QDataStream \
 		/Users/kremenevskiy/Apps/Qt/5.14.2/clang_64/lib/QtCore.framework/Headers/qdatastream.h \
 		/Users/kremenevskiy/Apps/Qt/5.14.2/clang_64/lib/QtWidgets.framework/Headers/QApplication \
@@ -842,6 +850,8 @@ chatwindow.o: ../../../Messenger/Client/chatwindow.cpp ../../../Messenger/Client
 		../../../Messenger/Client/chatclient.h \
 		/Users/kremenevskiy/Apps/Qt/5.14.2/clang_64/lib/QtCore.framework/Headers/QObject \
 		/Users/kremenevskiy/Apps/Qt/5.14.2/clang_64/lib/QtCore.framework/Headers/qobject.h \
+		/Users/kremenevskiy/Apps/Qt/5.14.2/clang_64/lib/QtCore.framework/Headers/QTime \
+		/Users/kremenevskiy/Apps/Qt/5.14.2/clang_64/lib/QtCore.framework/Headers/qdatetime.h \
 		/Users/kremenevskiy/Apps/Qt/5.14.2/clang_64/lib/QtCore.framework/Headers/QDataStream \
 		/Users/kremenevskiy/Apps/Qt/5.14.2/clang_64/lib/QtCore.framework/Headers/qdatastream.h \
 		../../../Messenger/Client/ui_chatwindow.h
