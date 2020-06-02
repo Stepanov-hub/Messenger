@@ -16,6 +16,7 @@
 #include <QJsonParseError>
 
 #include "chatclient.h"
+#include "connectiondialog.h"
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class ChatWindow; }
@@ -38,20 +39,36 @@ public slots:
 	void messageReceived(const QString &sender, const QString &text, const QString &time);
 	void sendMessage();
 	void disconnectedFromServer();
+	void disconnectFromServer();
 	void userJoined(const QString &userName);
 	void userLeft(const QString &userName);
+	void tryChangeName();
+	void userChangedName(const QString &oldName, const QString &newName);
+	void changeName(const QString &newName);
 
+	void handlingErrors(const QString &errorReason);
 
 	void loggedIn();
 	void loginFailed(const QString &reason);
 
 private:
-	Ui::ChatWindow *ui;
+	void newName();
+	void restartButtonState();
 
+private:
+	Ui::ChatWindow *ui;
+	QString hostAddress;
+	quint16 port;
+
+	QString userName;
 	QString lastUserName;
 	QString lastMinuteMessage;
+	QString myLastMinuteMessage;
 
 	QStandardItemModel *chatModel;
 	ChatClient *client;
+
+	bool Idisconnect;
+
 };
 #endif // CHATWINDOW_H

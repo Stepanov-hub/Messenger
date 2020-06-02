@@ -10,6 +10,11 @@ ChatClient::ChatClient(QObject *parent) : QObject(parent), clientSocket(new QTcp
 
 void ChatClient::connectToServer(const QHostAddress &hostAddress, quint16 port){
 	clientSocket->connectToHost(hostAddress, port);
+	clientSocket->waitForConnected(3000);
+
+	if (clientSocket->state() == QAbstractSocket::UnconnectedState)
+		emit errorOccured("Can't connect to that host!");
+
 }
 
 
@@ -26,13 +31,30 @@ void ChatClient::login(const QString &userName){
 		QJsonObject loginMessage;
 		loginMessage["type"] = "login";
 		loginMessage["username"] = userName;
+		this->userName = userName;
 
 		clientStream << QJsonDocument(loginMessage).toJson();
 	}
 }
 
 
-void ChatClient::sendMessage(const QString &text){
+void ChatClient::changeName(const QString &oldName, const QString &newName){
+	if (clientSocket->state() == QAbstractSocket::ConnectedState){
+
+		QDataStream clientStream(clientSocket);
+
+		QJsonObject newNameMessage;
+		newNameMessage["type"] = "changename";
+		newNameMessage["oldName"] = oldName;
+		newNameMessage["newName"] = newName;
+		this->userName = newName;
+
+		clientStream << QJsonDocument(newNameMessage).toJson();
+	}
+}
+
+
+void ChatClient::sendMessage(const QString &text, const QString &time){
 	if (text.isEmpty()){
 		return;
 	}
@@ -40,7 +62,6 @@ void ChatClient::sendMessage(const QString &text){
 	QDataStream clientStream(clientSocket);
 
 	QJsonObject message;
-	QString time = QTime::currentTime().toString("hh:mm");
 
 	message["type"] = "message";
 	message["text"] = text;
@@ -59,27 +80,41 @@ void ChatClient::onReadyRead()
 
 	QDataStream clientStream(clientSocket);
 
-	clientStream >> jsonArray;
+	//clientStream.setVersion(QDataStream::Qt_5_7);
+	int i = 0;
 
-	QJsonParseError jsonError;
-	QJsonDocument jsonDoc = QJsonDocument::fromJson(jsonArray, &jsonError);
+	for(;;){
+		clientStream.startTransaction();
 
-	if(jsonError.error == QJsonParseError::NoError)
-	{
-		if(jsonDoc.isObject()){
-//			qDebug() << "Object success" << QString::fromUtf8(jsonDoc.toJson());
-			jsonReceived(jsonDoc.object());
+		clientStream >> jsonArray;
+
+		if (clientStream.commitTransaction()){
+			QJsonParseError jsonError;
+			QJsonDocument jsonDoc = QJsonDocument::fromJson(jsonArray, &jsonError);
+
+			if(jsonError.error == QJsonParseError::NoError)
+			{
+				if(jsonDoc.isObject()){
+					//qDebug() << "Object success" << QString::fromUtf8(jsonDoc.toJson());
+					jsonReceived(jsonDoc.object());
+				}
+				else{
+					//qDebug() << "json isn't object! " << jsonArray;
+				}
+			}
+			else{
+				//qDebug() << "Error with pasing json: " << jsonError.errorString()
+						 //<< "\n From: " << jsonArray;
+			}
 		}
 		else{
-//			qDebug() << "json isn't object! " << jsonArray;
+			// if no more data to read go out from the loop
+			break;
 		}
-	}
-	else{
-//		qDebug() << "Error with pasing json: " << jsonError.errorString()
-//				 << "\n From: " << jsonArray;
 	}
 
 }
+
 
 void ChatClient::jsonReceived(const QJsonObject &docObj)
 {
@@ -104,7 +139,7 @@ void ChatClient::jsonReceived(const QJsonObject &docObj)
 		if (reasonValue.isNull() || !reasonValue.isString()){
 			return;
 		}
-
+		this->userName = "__________";
 		emit loginError(reasonValue.toString());
 
 	}
@@ -152,6 +187,47 @@ void ChatClient::jsonReceived(const QJsonObject &docObj)
 		QString userName = userNameValue.toString();
 
 		emit userLeft(userName);
+	}
+	else if(typeValue.toString() == "changeName"){
+		const QJsonValue oldNameValue = docObj.value("oldName");
+		const QJsonValue newNameValue = docObj.value("newName");
+
+		if (oldNameValue.isNull() || !oldNameValue.isString() || newNameValue.isNull() || !newNameValue.isString()){
+			return;
+		}
+
+		const QString oldName = oldNameValue.toString();
+		const QString newName = newNameValue.toString();
+
+		emit userChangedName(oldName, newName);
+	}
+
+	if (typeValue.toString() == "resultNameChanged"){
+		const QJsonValue successValue = docObj.value("success");
+		if (successValue.isNull() || !successValue.isBool()){
+			return;
+		}
+
+		bool success = successValue.toBool();
+
+		if(success){
+			QJsonValue newNameValue = docObj.value("newName");
+			if(newNameValue.isNull() || !newNameValue.isString()){
+				return;
+			}
+
+			QString newName = newNameValue.toString();
+			emit changedName(newName);
+		}
+		else{
+			const QJsonValue reasonValue = docObj.value("reason");
+			if(reasonValue.isNull() || !reasonValue.isString()){
+				return;
+			}
+			const QString errorReason = reasonValue.toString();
+
+			emit errorOccured(errorReason);
+		}
 	}
 
 }

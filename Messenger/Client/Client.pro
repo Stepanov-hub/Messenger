@@ -17,15 +17,18 @@ DEFINES += QT_DEPRECATED_WARNINGS
 
 SOURCES += \
     chatclient.cpp \
+    connectiondialog.cpp \
     main.cpp \
     chatwindow.cpp
 
 HEADERS += \
     chatclient.h \
-    chatwindow.h
+    chatwindow.h \
+    connectiondialog.h
 
 FORMS += \
-    chatwindow.ui
+    chatwindow.ui \
+    connectiondialog.ui
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin
