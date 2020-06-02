@@ -103,28 +103,71 @@ void ChatServer::JsonFromLoggedIn(Worker *sender, const QJsonObject jsonObj){
 
 	QJsonValue jsonValue = jsonObj.value("type");
 
-	if (jsonValue.toString() !=  "message")
-		return;
+	if (jsonValue.toString() ==  "message"){
+		QJsonValue textValue = jsonObj.value("text");
+		if(textValue.isNull())
+			return;
 
-	QJsonValue textValue = jsonObj.value("text");
-	if(textValue.isNull())
-		return;
+		QString text = textValue.toString();
 
-	QString text = textValue.toString();
+		QJsonValue timeValue = jsonObj.value("time");
+		if (timeValue.isNull() || !timeValue.isString())
+			return;
 
-	QJsonValue timeValue = jsonObj.value("time");
-	if (timeValue.isNull() || !timeValue.isString())
-		return;
+		QString time = timeValue.toString();
 
-	QString time = timeValue.toString();
+		QJsonObject message;
+		message["type"] = "message";
+		message["text"] = text;
+		message["sender"] = sender->UserName();
+		message["time"] = time;
 
-	QJsonObject message;
-	message["type"] = "message";
-	message["text"] = text;
-	message["sender"] = sender->UserName();
-	message["time"] = time;
+		Broadcast(message, sender);
+	}
+	else if(jsonValue.toString() == "changename"){
+		QJsonValue oldNameValue = jsonObj.value("oldName");
+		QJsonValue newNameValue = jsonObj.value("newName");
 
-	Broadcast(message, sender);
+		if(oldNameValue.isNull() || !oldNameValue.isString() || newNameValue.isNull() || !newNameValue.isString()){
+			return;
+		}
+
+		QString  oldName = oldNameValue.toString();
+		QString newName = newNameValue.toString();
+
+		for(Worker *worker : clients){
+			if(worker == sender)
+				continue;
+
+			if(worker->UserName() == newName){
+
+				QJsonObject failChangeNameMsg;
+				failChangeNameMsg["type"] = "resultNameChanged";
+				failChangeNameMsg["success"] = false;
+				failChangeNameMsg["reason"] = "User with that name already exists!";
+
+				SendJson(sender, failChangeNameMsg);
+				return;
+			}
+
+		}
+
+		sender->SetUserName(newName);
+
+		QJsonObject changedNameMessage;
+		changedNameMessage["type"] = "changeName";
+		changedNameMessage["oldName"] = oldName;
+		changedNameMessage["newName"] = newName;
+
+		Broadcast(changedNameMessage, nullptr);
+
+		QJsonObject newNamesuccess;
+		newNamesuccess["type"] = "resultNameChanged";
+		newNamesuccess["success"] = true;
+		newNamesuccess["newName"] = newName;
+
+		SendJson(sender, newNamesuccess);
+	}
 }
 
 

@@ -8,6 +8,8 @@ ServerWindow::ServerWindow(QWidget *parent)
 {
 	ui->setupUi(this);
 
+	setFixedSize(589, 395);
+
 	ui->logEdit->setReadOnly(true);
 
 	connect(ui->startServerButton, &QPushButton::clicked, this, &ServerWindow::StartButtonClicked);
