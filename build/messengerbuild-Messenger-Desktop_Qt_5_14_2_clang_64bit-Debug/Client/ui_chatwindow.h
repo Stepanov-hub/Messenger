@@ -29,14 +29,18 @@ public:
     QWidget *centralwidget;
     QListView *chatView;
     QPushButton *connectButton;
+    QPushButton *sendButton;
+    QLineEdit *messageEdit;
+    QLabel *ipLabel;
+    QLabel *portLabel;
+    QLabel *IP;
+    QLabel *PORT;
+    QPushButton *disconnectButton;
+    QPushButton *changeNameButton;
     QWidget *widget;
     QHBoxLayout *horizontalLayout;
     QLabel *label;
-    QLabel *label_2;
-    QWidget *widget1;
-    QHBoxLayout *horizontalLayout_2;
-    QLineEdit *messageEdit;
-    QPushButton *sendButton;
+    QLabel *userNameLabel;
     QMenuBar *menubar;
     QStatusBar *statusbar;
 
@@ -44,52 +48,64 @@ public:
     {
         if (ChatWindow->objectName().isEmpty())
             ChatWindow->setObjectName(QString::fromUtf8("ChatWindow"));
-        ChatWindow->resize(576, 432);
+        ChatWindow->resize(579, 425);
         centralwidget = new QWidget(ChatWindow);
         centralwidget->setObjectName(QString::fromUtf8("centralwidget"));
         chatView = new QListView(centralwidget);
         chatView->setObjectName(QString::fromUtf8("chatView"));
-        chatView->setGeometry(QRect(10, 40, 541, 281));
+        chatView->setGeometry(QRect(10, 40, 561, 301));
         connectButton = new QPushButton(centralwidget);
         connectButton->setObjectName(QString::fromUtf8("connectButton"));
-        connectButton->setGeometry(QRect(390, 10, 151, 31));
+        connectButton->setGeometry(QRect(420, 5, 155, 30));
+        connectButton->setStyleSheet(QString::fromUtf8("font: 15pt \"Monaco\";"));
+        sendButton = new QPushButton(centralwidget);
+        sendButton->setObjectName(QString::fromUtf8("sendButton"));
+        sendButton->setGeometry(QRect(510, 348, 61, 31));
+        messageEdit = new QLineEdit(centralwidget);
+        messageEdit->setObjectName(QString::fromUtf8("messageEdit"));
+        messageEdit->setGeometry(QRect(10, 350, 490, 25));
+        ipLabel = new QLabel(centralwidget);
+        ipLabel->setObjectName(QString::fromUtf8("ipLabel"));
+        ipLabel->setGeometry(QRect(425, 3, 59, 16));
+        portLabel = new QLabel(centralwidget);
+        portLabel->setObjectName(QString::fromUtf8("portLabel"));
+        portLabel->setGeometry(QRect(425, 19, 59, 16));
+        portLabel->setAlignment(Qt::AlignCenter);
+        IP = new QLabel(centralwidget);
+        IP->setObjectName(QString::fromUtf8("IP"));
+        IP->setGeometry(QRect(490, 3, 58, 16));
+        PORT = new QLabel(centralwidget);
+        PORT->setObjectName(QString::fromUtf8("PORT"));
+        PORT->setGeometry(QRect(490, 19, 58, 16));
+        disconnectButton = new QPushButton(centralwidget);
+        disconnectButton->setObjectName(QString::fromUtf8("disconnectButton"));
+        disconnectButton->setGeometry(QRect(304, 5, 111, 30));
+        disconnectButton->setStyleSheet(QString::fromUtf8("font: 15pt \"Monaco\";"));
+        changeNameButton = new QPushButton(centralwidget);
+        changeNameButton->setObjectName(QString::fromUtf8("changeNameButton"));
+        changeNameButton->setGeometry(QRect(170, 10, 71, 24));
         widget = new QWidget(centralwidget);
         widget->setObjectName(QString::fromUtf8("widget"));
-        widget->setGeometry(QRect(20, 10, 145, 18));
+        widget->setGeometry(QRect(10, 10, 148, 19));
         horizontalLayout = new QHBoxLayout(widget);
         horizontalLayout->setObjectName(QString::fromUtf8("horizontalLayout"));
         horizontalLayout->setContentsMargins(0, 0, 0, 0);
         label = new QLabel(widget);
         label->setObjectName(QString::fromUtf8("label"));
-        label->setStyleSheet(QString::fromUtf8("<b>dsf</b>"));
+        label->setStyleSheet(QString::fromUtf8("font: 13pt \"Monaco\";\n"
+"background: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:0, stop:0 rgba(255, 178, 102, 255), stop:0.55 rgba(235, 148, 61, 255), stop:0.98 rgba(0, 0, 0, 255), stop:1 rgba(0, 0, 0, 0))"));
 
         horizontalLayout->addWidget(label);
 
-        label_2 = new QLabel(widget);
-        label_2->setObjectName(QString::fromUtf8("label_2"));
+        userNameLabel = new QLabel(widget);
+        userNameLabel->setObjectName(QString::fromUtf8("userNameLabel"));
 
-        horizontalLayout->addWidget(label_2);
-
-        widget1 = new QWidget(centralwidget);
-        widget1->setObjectName(QString::fromUtf8("widget1"));
-        widget1->setGeometry(QRect(20, 330, 531, 41));
-        horizontalLayout_2 = new QHBoxLayout(widget1);
-        horizontalLayout_2->setObjectName(QString::fromUtf8("horizontalLayout_2"));
-        horizontalLayout_2->setContentsMargins(0, 0, 0, 0);
-        messageEdit = new QLineEdit(widget1);
-        messageEdit->setObjectName(QString::fromUtf8("messageEdit"));
-
-        horizontalLayout_2->addWidget(messageEdit);
-
-        sendButton = new QPushButton(widget1);
-        sendButton->setObjectName(QString::fromUtf8("sendButton"));
-
-        horizontalLayout_2->addWidget(sendButton);
+        horizontalLayout->addWidget(userNameLabel);
 
         ChatWindow->setCentralWidget(centralwidget);
         menubar = new QMenuBar(ChatWindow);
         menubar->setObjectName(QString::fromUtf8("menubar"));
-        menubar->setGeometry(QRect(0, 0, 576, 22));
+        menubar->setGeometry(QRect(0, 0, 579, 22));
         ChatWindow->setMenuBar(menubar);
         statusbar = new QStatusBar(ChatWindow);
         statusbar->setObjectName(QString::fromUtf8("statusbar"));
@@ -104,10 +120,16 @@ public:
     {
         ChatWindow->setWindowTitle(QCoreApplication::translate("ChatWindow", "ChatWindow", nullptr));
         connectButton->setText(QCoreApplication::translate("ChatWindow", "Connect", nullptr));
-        label->setText(QCoreApplication::translate("ChatWindow", "UserName:", nullptr));
-        label_2->setText(QCoreApplication::translate("ChatWindow", "____________", nullptr));
-        messageEdit->setText(QCoreApplication::translate("ChatWindow", "sdfsf", nullptr));
         sendButton->setText(QCoreApplication::translate("ChatWindow", "Send", nullptr));
+        messageEdit->setText(QString());
+        ipLabel->setText(QCoreApplication::translate("ChatWindow", "Server IP:", nullptr));
+        portLabel->setText(QCoreApplication::translate("ChatWindow", "Port:", nullptr));
+        IP->setText(QString());
+        PORT->setText(QString());
+        disconnectButton->setText(QCoreApplication::translate("ChatWindow", "Disconnect", nullptr));
+        changeNameButton->setText(QCoreApplication::translate("ChatWindow", "Change", nullptr));
+        label->setText(QCoreApplication::translate("ChatWindow", "UserName:", nullptr));
+        userNameLabel->setText(QCoreApplication::translate("ChatWindow", "__________", nullptr));
     } // retranslateUi
 
 };

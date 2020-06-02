@@ -53,14 +53,18 @@ OBJECTS_DIR   = ./
 ####### Files
 
 SOURCES       = ../../../Messenger/Client/chatclient.cpp \
+		../../../Messenger/Client/connectiondialog.cpp \
 		../../../Messenger/Client/main.cpp \
 		../../../Messenger/Client/chatwindow.cpp moc_chatclient.cpp \
-		moc_chatwindow.cpp
+		moc_chatwindow.cpp \
+		moc_connectiondialog.cpp
 OBJECTS       = chatclient.o \
+		connectiondialog.o \
 		main.o \
 		chatwindow.o \
 		moc_chatclient.o \
-		moc_chatwindow.o
+		moc_chatwindow.o \
+		moc_connectiondialog.o
 DIST          = /Users/kremenevskiy/Apps/Qt/5.14.2/clang_64/mkspecs/features/spec_pre.prf \
 		/Users/kremenevskiy/Apps/Qt/5.14.2/clang_64/mkspecs/qdevice.pri \
 		/Users/kremenevskiy/Apps/Qt/5.14.2/clang_64/mkspecs/features/device_config.prf \
@@ -209,7 +213,7 @@ DIST          = /Users/kremenevskiy/Apps/Qt/5.14.2/clang_64/mkspecs/features/spe
 		/Users/kremenevskiy/Apps/Qt/5.14.2/clang_64/mkspecs/features/qt_config.prf \
 		/Users/kremenevskiy/Apps/Qt/5.14.2/clang_64/mkspecs/macx-clang/qmake.conf \
 		/Users/kremenevskiy/Apps/Qt/5.14.2/clang_64/mkspecs/features/spec_post.prf \
-		../../../Messenger/.qmake.stash \
+		../../../Messenger/Client/.qmake.stash \
 		/Users/kremenevskiy/Apps/Qt/5.14.2/clang_64/mkspecs/features/exclusive_builds.prf \
 		/Users/kremenevskiy/Apps/Qt/5.14.2/clang_64/mkspecs/features/mac/sdk.prf \
 		/Users/kremenevskiy/Apps/Qt/5.14.2/clang_64/mkspecs/features/toolchain.prf \
@@ -239,7 +243,9 @@ DIST          = /Users/kremenevskiy/Apps/Qt/5.14.2/clang_64/mkspecs/features/spe
 		/Users/kremenevskiy/Apps/Qt/5.14.2/clang_64/mkspecs/features/yacc.prf \
 		/Users/kremenevskiy/Apps/Qt/5.14.2/clang_64/mkspecs/features/lex.prf \
 		../../../Client/Client.pro ../../../Messenger/Client/chatclient.h \
-		../../../Messenger/Client/chatwindow.h ../../../Messenger/Client/chatclient.cpp \
+		../../../Messenger/Client/chatwindow.h \
+		../../../Messenger/Client/connectiondialog.h ../../../Messenger/Client/chatclient.cpp \
+		../../../Messenger/Client/connectiondialog.cpp \
 		../../../Messenger/Client/main.cpp \
 		../../../Messenger/Client/chatwindow.cpp
 QMAKE_TARGET  = Client
@@ -260,7 +266,7 @@ include /Users/kremenevskiy/Apps/Qt/5.14.2/clang_64/mkspecs/features/mac/sdk.mk
 first: all
 ####### Build rules
 
-Client.app/Contents/MacOS/Client: ui_chatwindow.h $(OBJECTS)  
+Client.app/Contents/MacOS/Client: ui_chatwindow.h ui_connectiondialog.h $(OBJECTS)  
 	@test -d Client.app/Contents/MacOS/ || mkdir -p Client.app/Contents/MacOS/
 	$(LINK) $(LFLAGS) -o $(TARGET) $(OBJECTS) $(OBJCOMP) $(LIBS)
 
@@ -412,7 +418,7 @@ Makefile: ../../../Messenger/Client/Client.pro /Users/kremenevskiy/Apps/Qt/5.14.
 		/Users/kremenevskiy/Apps/Qt/5.14.2/clang_64/mkspecs/features/qt_config.prf \
 		/Users/kremenevskiy/Apps/Qt/5.14.2/clang_64/mkspecs/macx-clang/qmake.conf \
 		/Users/kremenevskiy/Apps/Qt/5.14.2/clang_64/mkspecs/features/spec_post.prf \
-		../.qmake.stash \
+		.qmake.stash \
 		/Users/kremenevskiy/Apps/Qt/5.14.2/clang_64/mkspecs/features/exclusive_builds.prf \
 		/Users/kremenevskiy/Apps/Qt/5.14.2/clang_64/mkspecs/features/mac/sdk.prf \
 		/Users/kremenevskiy/Apps/Qt/5.14.2/clang_64/mkspecs/features/toolchain.prf \
@@ -595,7 +601,7 @@ Makefile: ../../../Messenger/Client/Client.pro /Users/kremenevskiy/Apps/Qt/5.14.
 /Users/kremenevskiy/Apps/Qt/5.14.2/clang_64/mkspecs/features/qt_config.prf:
 /Users/kremenevskiy/Apps/Qt/5.14.2/clang_64/mkspecs/macx-clang/qmake.conf:
 /Users/kremenevskiy/Apps/Qt/5.14.2/clang_64/mkspecs/features/spec_post.prf:
-../.qmake.stash:
+.qmake.stash:
 /Users/kremenevskiy/Apps/Qt/5.14.2/clang_64/mkspecs/features/exclusive_builds.prf:
 /Users/kremenevskiy/Apps/Qt/5.14.2/clang_64/mkspecs/features/mac/sdk.prf:
 /Users/kremenevskiy/Apps/Qt/5.14.2/clang_64/mkspecs/features/toolchain.prf:
@@ -659,9 +665,9 @@ distdir: FORCE
 	@test -d $(DISTDIR) || mkdir -p $(DISTDIR)
 	$(COPY_FILE) --parents $(DIST) $(DISTDIR)/
 	$(COPY_FILE) --parents /Users/kremenevskiy/Apps/Qt/5.14.2/clang_64/mkspecs/features/data/dummy.cpp $(DISTDIR)/
-	$(COPY_FILE) --parents ../../../Messenger/Client/chatclient.h ../../../Messenger/Client/chatwindow.h $(DISTDIR)/
-	$(COPY_FILE) --parents ../../../Messenger/Client/chatclient.cpp ../../../Messenger/Client/main.cpp ../../../Messenger/Client/chatwindow.cpp $(DISTDIR)/
-	$(COPY_FILE) --parents ../../../Messenger/Client/chatwindow.ui $(DISTDIR)/
+	$(COPY_FILE) --parents ../../../Messenger/Client/chatclient.h ../../../Messenger/Client/chatwindow.h ../../../Messenger/Client/connectiondialog.h $(DISTDIR)/
+	$(COPY_FILE) --parents ../../../Messenger/Client/chatclient.cpp ../../../Messenger/Client/connectiondialog.cpp ../../../Messenger/Client/main.cpp ../../../Messenger/Client/chatwindow.cpp $(DISTDIR)/
+	$(COPY_FILE) --parents ../../../Messenger/Client/chatwindow.ui ../../../Messenger/Client/connectiondialog.ui $(DISTDIR)/
 
 
 clean: compiler_clean 
@@ -671,6 +677,7 @@ clean: compiler_clean
 
 distclean: clean 
 	-$(DEL_FILE) -r Client.app
+	-$(DEL_FILE) .qmake.stash
 	-$(DEL_FILE) Makefile
 
 
@@ -695,9 +702,9 @@ compiler_moc_predefs_clean:
 moc_predefs.h: /Users/kremenevskiy/Apps/Qt/5.14.2/clang_64/mkspecs/features/data/dummy.cpp
 	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang++ -pipe -stdlib=libc++ -g -std=gnu++11 $(EXPORT_ARCH_ARGS) -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.15.sdk -mmacosx-version-min=10.13 -Wall -Wextra -dM -E -o moc_predefs.h /Users/kremenevskiy/Apps/Qt/5.14.2/clang_64/mkspecs/features/data/dummy.cpp
 
-compiler_moc_header_make_all: moc_chatclient.cpp moc_chatwindow.cpp
+compiler_moc_header_make_all: moc_chatclient.cpp moc_chatwindow.cpp moc_connectiondialog.cpp
 compiler_moc_header_clean:
-	-$(DEL_FILE) moc_chatclient.cpp moc_chatwindow.cpp
+	-$(DEL_FILE) moc_chatclient.cpp moc_chatwindow.cpp moc_connectiondialog.cpp
 moc_chatclient.cpp: ../../../Messenger/Client/chatclient.h \
 		/Users/kremenevskiy/Apps/Qt/5.14.2/clang_64/lib/QtCore.framework/Headers/QObject \
 		/Users/kremenevskiy/Apps/Qt/5.14.2/clang_64/lib/QtCore.framework/Headers/qobject.h \
@@ -747,20 +754,38 @@ moc_chatwindow.cpp: ../../../Messenger/Client/chatwindow.h \
 		/Users/kremenevskiy/Apps/Qt/5.14.2/clang_64/lib/QtCore.framework/Headers/qdatetime.h \
 		/Users/kremenevskiy/Apps/Qt/5.14.2/clang_64/lib/QtCore.framework/Headers/QDataStream \
 		/Users/kremenevskiy/Apps/Qt/5.14.2/clang_64/lib/QtCore.framework/Headers/qdatastream.h \
+		../../../Messenger/Client/connectiondialog.h \
+		/Users/kremenevskiy/Apps/Qt/5.14.2/clang_64/lib/QtWidgets.framework/Headers/QDialog \
+		/Users/kremenevskiy/Apps/Qt/5.14.2/clang_64/lib/QtWidgets.framework/Headers/qdialog.h \
+		/Users/kremenevskiy/Apps/Qt/5.14.2/clang_64/lib/QtWidgets.framework/Headers/QCheckBox \
+		/Users/kremenevskiy/Apps/Qt/5.14.2/clang_64/lib/QtWidgets.framework/Headers/qcheckbox.h \
 		moc_predefs.h \
 		/Users/kremenevskiy/Apps/Qt/5.14.2/clang_64/bin/moc
 	/Users/kremenevskiy/Apps/Qt/5.14.2/clang_64/bin/moc $(DEFINES) --include /Users/kremenevskiy/Desktop/Messenger/build/messengerbuild-Messenger-Desktop_Qt_5_14_2_clang_64bit-Debug/Client/moc_predefs.h -I/Users/kremenevskiy/Apps/Qt/5.14.2/clang_64/mkspecs/macx-clang -I/Users/kremenevskiy/Desktop/Messenger/Messenger/Client -I/Users/kremenevskiy/Apps/Qt/5.14.2/clang_64/lib/QtWidgets.framework/Headers -I/Users/kremenevskiy/Apps/Qt/5.14.2/clang_64/lib/QtGui.framework/Headers -I/Users/kremenevskiy/Apps/Qt/5.14.2/clang_64/lib/QtNetwork.framework/Headers -I/Users/kremenevskiy/Apps/Qt/5.14.2/clang_64/lib/QtCore.framework/Headers -I. -I/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include/c++/v1 -I/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/11.0.3/include -I/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.15.sdk/usr/include -I/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include -F/Users/kremenevskiy/Apps/Qt/5.14.2/clang_64/lib ../../../Messenger/Client/chatwindow.h -o moc_chatwindow.cpp
+
+moc_connectiondialog.cpp: ../../../Messenger/Client/connectiondialog.h \
+		/Users/kremenevskiy/Apps/Qt/5.14.2/clang_64/lib/QtWidgets.framework/Headers/QDialog \
+		/Users/kremenevskiy/Apps/Qt/5.14.2/clang_64/lib/QtWidgets.framework/Headers/qdialog.h \
+		/Users/kremenevskiy/Apps/Qt/5.14.2/clang_64/lib/QtWidgets.framework/Headers/QCheckBox \
+		/Users/kremenevskiy/Apps/Qt/5.14.2/clang_64/lib/QtWidgets.framework/Headers/qcheckbox.h \
+		moc_predefs.h \
+		/Users/kremenevskiy/Apps/Qt/5.14.2/clang_64/bin/moc
+	/Users/kremenevskiy/Apps/Qt/5.14.2/clang_64/bin/moc $(DEFINES) --include /Users/kremenevskiy/Desktop/Messenger/build/messengerbuild-Messenger-Desktop_Qt_5_14_2_clang_64bit-Debug/Client/moc_predefs.h -I/Users/kremenevskiy/Apps/Qt/5.14.2/clang_64/mkspecs/macx-clang -I/Users/kremenevskiy/Desktop/Messenger/Messenger/Client -I/Users/kremenevskiy/Apps/Qt/5.14.2/clang_64/lib/QtWidgets.framework/Headers -I/Users/kremenevskiy/Apps/Qt/5.14.2/clang_64/lib/QtGui.framework/Headers -I/Users/kremenevskiy/Apps/Qt/5.14.2/clang_64/lib/QtNetwork.framework/Headers -I/Users/kremenevskiy/Apps/Qt/5.14.2/clang_64/lib/QtCore.framework/Headers -I. -I/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include/c++/v1 -I/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/11.0.3/include -I/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.15.sdk/usr/include -I/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include -F/Users/kremenevskiy/Apps/Qt/5.14.2/clang_64/lib ../../../Messenger/Client/connectiondialog.h -o moc_connectiondialog.cpp
 
 compiler_moc_objc_header_make_all:
 compiler_moc_objc_header_clean:
 compiler_moc_source_make_all:
 compiler_moc_source_clean:
-compiler_uic_make_all: ui_chatwindow.h
+compiler_uic_make_all: ui_chatwindow.h ui_connectiondialog.h
 compiler_uic_clean:
-	-$(DEL_FILE) ui_chatwindow.h
+	-$(DEL_FILE) ui_chatwindow.h ui_connectiondialog.h
 ui_chatwindow.h: ../../../Messenger/Client/chatwindow.ui \
 		/Users/kremenevskiy/Apps/Qt/5.14.2/clang_64/bin/uic
 	/Users/kremenevskiy/Apps/Qt/5.14.2/clang_64/bin/uic ../../../Messenger/Client/chatwindow.ui -o ui_chatwindow.h
+
+ui_connectiondialog.h: ../../../Messenger/Client/connectiondialog.ui \
+		/Users/kremenevskiy/Apps/Qt/5.14.2/clang_64/bin/uic
+	/Users/kremenevskiy/Apps/Qt/5.14.2/clang_64/bin/uic ../../../Messenger/Client/connectiondialog.ui -o ui_connectiondialog.h
 
 compiler_rez_source_make_all:
 compiler_rez_source_clean:
@@ -792,6 +817,14 @@ chatclient.o: ../../../Messenger/Client/chatclient.cpp ../../../Messenger/Client
 		/Users/kremenevskiy/Apps/Qt/5.14.2/clang_64/lib/QtCore.framework/Headers/QJsonParseError
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o chatclient.o ../../../Messenger/Client/chatclient.cpp
 
+connectiondialog.o: ../../../Messenger/Client/connectiondialog.cpp ../../../Messenger/Client/connectiondialog.h \
+		/Users/kremenevskiy/Apps/Qt/5.14.2/clang_64/lib/QtWidgets.framework/Headers/QDialog \
+		/Users/kremenevskiy/Apps/Qt/5.14.2/clang_64/lib/QtWidgets.framework/Headers/qdialog.h \
+		/Users/kremenevskiy/Apps/Qt/5.14.2/clang_64/lib/QtWidgets.framework/Headers/QCheckBox \
+		/Users/kremenevskiy/Apps/Qt/5.14.2/clang_64/lib/QtWidgets.framework/Headers/qcheckbox.h \
+		ui_connectiondialog.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o connectiondialog.o ../../../Messenger/Client/connectiondialog.cpp
+
 main.o: ../../../Messenger/Client/main.cpp ../../../Messenger/Client/chatwindow.h \
 		/Users/kremenevskiy/Apps/Qt/5.14.2/clang_64/lib/QtWidgets.framework/Headers/QMainWindow \
 		/Users/kremenevskiy/Apps/Qt/5.14.2/clang_64/lib/QtWidgets.framework/Headers/qmainwindow.h \
@@ -821,6 +854,11 @@ main.o: ../../../Messenger/Client/main.cpp ../../../Messenger/Client/chatwindow.
 		/Users/kremenevskiy/Apps/Qt/5.14.2/clang_64/lib/QtCore.framework/Headers/qdatetime.h \
 		/Users/kremenevskiy/Apps/Qt/5.14.2/clang_64/lib/QtCore.framework/Headers/QDataStream \
 		/Users/kremenevskiy/Apps/Qt/5.14.2/clang_64/lib/QtCore.framework/Headers/qdatastream.h \
+		../../../Messenger/Client/connectiondialog.h \
+		/Users/kremenevskiy/Apps/Qt/5.14.2/clang_64/lib/QtWidgets.framework/Headers/QDialog \
+		/Users/kremenevskiy/Apps/Qt/5.14.2/clang_64/lib/QtWidgets.framework/Headers/qdialog.h \
+		/Users/kremenevskiy/Apps/Qt/5.14.2/clang_64/lib/QtWidgets.framework/Headers/QCheckBox \
+		/Users/kremenevskiy/Apps/Qt/5.14.2/clang_64/lib/QtWidgets.framework/Headers/qcheckbox.h \
 		/Users/kremenevskiy/Apps/Qt/5.14.2/clang_64/lib/QtWidgets.framework/Headers/QApplication \
 		/Users/kremenevskiy/Apps/Qt/5.14.2/clang_64/lib/QtWidgets.framework/Headers/qapplication.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o main.o ../../../Messenger/Client/main.cpp
@@ -854,7 +892,12 @@ chatwindow.o: ../../../Messenger/Client/chatwindow.cpp ../../../Messenger/Client
 		/Users/kremenevskiy/Apps/Qt/5.14.2/clang_64/lib/QtCore.framework/Headers/qdatetime.h \
 		/Users/kremenevskiy/Apps/Qt/5.14.2/clang_64/lib/QtCore.framework/Headers/QDataStream \
 		/Users/kremenevskiy/Apps/Qt/5.14.2/clang_64/lib/QtCore.framework/Headers/qdatastream.h \
-		../../../Messenger/Client/ui_chatwindow.h
+		../../../Messenger/Client/connectiondialog.h \
+		/Users/kremenevskiy/Apps/Qt/5.14.2/clang_64/lib/QtWidgets.framework/Headers/QDialog \
+		/Users/kremenevskiy/Apps/Qt/5.14.2/clang_64/lib/QtWidgets.framework/Headers/qdialog.h \
+		/Users/kremenevskiy/Apps/Qt/5.14.2/clang_64/lib/QtWidgets.framework/Headers/QCheckBox \
+		/Users/kremenevskiy/Apps/Qt/5.14.2/clang_64/lib/QtWidgets.framework/Headers/qcheckbox.h \
+		ui_chatwindow.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o chatwindow.o ../../../Messenger/Client/chatwindow.cpp
 
 moc_chatclient.o: moc_chatclient.cpp 
@@ -862,6 +905,9 @@ moc_chatclient.o: moc_chatclient.cpp
 
 moc_chatwindow.o: moc_chatwindow.cpp 
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o moc_chatwindow.o moc_chatwindow.cpp
+
+moc_connectiondialog.o: moc_connectiondialog.cpp 
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o moc_connectiondialog.o moc_connectiondialog.cpp
 
 ####### Install
 

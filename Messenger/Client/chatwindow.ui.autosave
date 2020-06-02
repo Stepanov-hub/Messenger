@@ -13,6 +13,9 @@
   <property name="windowTitle">
    <string>ChatWindow</string>
   </property>
+  <property name="styleSheet">
+   <string notr="true"/>
+  </property>
   <widget class="QWidget" name="centralwidget">
    <widget class="QListView" name="chatView">
     <property name="geometry">
@@ -163,8 +166,7 @@
      <item>
       <widget class="QLabel" name="label">
        <property name="styleSheet">
-        <string notr="true">font: 13pt &quot;Monaco&quot;;
-background: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:0, stop:0 rgba(255, 178, 102, 255), stop:0.55 rgba(235, 148, 61, 255), stop:0.98 rgba(0, 0, 0, 255), stop:1 rgba(0, 0, 0, 0))</string>
+        <string notr="true"/>
        </property>
        <property name="text">
         <string>UserName:</string>
