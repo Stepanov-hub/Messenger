@@ -11,6 +11,7 @@ ServerWindow::ServerWindow(QWidget *parent)
 	setFixedSize(589, 395);
 
 	ui->logEdit->setReadOnly(true);
+	ui->stopServerButton->setEnabled(false);
 
 	connect(ui->startServerButton, &QPushButton::clicked, this, &ServerWindow::StartButtonClicked);
 	connect(ui->stopServerButton, &QPushButton::clicked, this, &ServerWindow::StopButtonClicked);

@@ -13,6 +13,153 @@
   <property name="windowTitle">
    <string>ServerWindow</string>
   </property>
+  <property name="styleSheet">
+   <string notr="true">/*-----QWidget-----*/   
+QWidget
+{
+	background-color: #3a3a3a;
+	color: #fff;
+	selection-background-color: #b78620;
+	selection-color: #000;
+
+}
+
+
+/*-----QPushButton-----*/
+QPushButton
+{
+	background-color: qlineargradient(spread:repeat, x1:1, y1:0, x2:1, y2:1, stop:0 rgba(84, 84, 84, 255),stop:1 rgba(59, 59, 59, 255));
+	color: #ffffff;
+	min-width: 80px;
+	border-style: solid;
+	border-width: 1px;
+	border-radius: 6px;
+	border-color: #051a39;
+	padding: 5px;
+
+}
+
+
+QPushButton::flat
+{
+	background-color: transparent;
+	border: none;
+	color: #fff;
+
+}
+
+
+QPushButton::disabled
+{
+	background-color: #404040;
+	color: #656565;
+	border-color:  rgb(175, 168, 167)    /*#051a39;*/
+
+}
+
+
+QPushButton::hover
+{
+	background-color: rgba(183, 134, 32, 20%);
+	border: 1px solid #b78620;
+
+}
+
+
+QPushButton::pressed
+{
+	background-color: qlineargradient(spread:repeat, x1:1, y1:0, x2:1, y2:1, stop:0 rgba(74, 74, 74, 255),stop:1 rgba(49, 49, 49, 255));
+	border: 1px solid #b78620;
+
+}
+
+
+QPushButton::checked
+{
+	background-color: qlineargradient(spread:repeat, x1:1, y1:0, x2:1, y2:1, stop:0 rgba(74, 74, 74, 255),stop:1 rgba(49, 49, 49, 255));
+	border: 1px solid #222;
+
+}
+
+
+/*-----QPlainTExtEdit-----*/
+QPlainTextEdit
+{
+	background-color: #131313;
+	color : #eee;
+	border: 1px solid #343434;
+	border-radius: 8px;
+	padding: 3px;
+	padding-left: 5px;
+
+}
+
+/*-----QLabel-----*/
+QLabel
+{
+	background-color: transparent;
+	color: #fff;
+
+}
+
+/*-----QLineEdit-----*/
+QLineEdit
+{
+	
+	selection-background-color: darkgray;
+	background-color: #131313;
+	color : #eee;
+	border: 1px solid #343434;
+	border-radius: 4px;
+	padding: 3px;
+	padding-left: 5px;
+
+}
+
+
+QLineEdit:disabled
+{
+	background-color: rgb(47, 49, 49);
+	color : rgb(150, 148, 152)
+
+}
+
+
+/*-----QCheckBox-----*/
+QCheckBox
+{
+	background-color: transparent;
+    color: lightgray;
+	border: none;
+
+}
+
+QCheckBox::indicator:unchecked:hover
+{
+	border: 1px solid #b78620; 
+	border-radius: 5px;
+
+}
+
+
+QCheckBox::disabled
+{
+	color: #656565;
+
+}
+
+
+QCheckBox::indicator:disabled
+{
+	background-color: #656565;
+	color: #656565;
+    border: 1px solid #656565;
+
+}
+
+
+</string>
+  </property>
   <widget class="QWidget" name="centralwidget">
    <widget class="QPushButton" name="startServerButton">
     <property name="geometry">
