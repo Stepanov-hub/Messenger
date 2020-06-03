@@ -37,7 +37,7 @@ public:
     QLabel *PORT;
     QPushButton *disconnectButton;
     QPushButton *changeNameButton;
-    QWidget *widget;
+    QWidget *layoutWidget;
     QHBoxLayout *horizontalLayout;
     QLabel *label;
     QLabel *userNameLabel;
@@ -204,7 +204,7 @@ public:
         portLabel->setAlignment(Qt::AlignCenter);
         IP = new QLabel(centralwidget);
         IP->setObjectName(QString::fromUtf8("IP"));
-        IP->setGeometry(QRect(495, 5, 58, 16));
+        IP->setGeometry(QRect(495, 5, 75, 16));
         IP->setFont(font);
         PORT = new QLabel(centralwidget);
         PORT->setObjectName(QString::fromUtf8("PORT"));
@@ -218,20 +218,20 @@ public:
         changeNameButton->setObjectName(QString::fromUtf8("changeNameButton"));
         changeNameButton->setGeometry(QRect(160, 7, 92, 30));
         changeNameButton->setStyleSheet(QString::fromUtf8("font-size: 15px;"));
-        widget = new QWidget(centralwidget);
-        widget->setObjectName(QString::fromUtf8("widget"));
-        widget->setGeometry(QRect(10, 10, 148, 24));
-        horizontalLayout = new QHBoxLayout(widget);
+        layoutWidget = new QWidget(centralwidget);
+        layoutWidget->setObjectName(QString::fromUtf8("layoutWidget"));
+        layoutWidget->setGeometry(QRect(10, 10, 148, 24));
+        horizontalLayout = new QHBoxLayout(layoutWidget);
         horizontalLayout->setObjectName(QString::fromUtf8("horizontalLayout"));
         horizontalLayout->setContentsMargins(0, 0, 0, 0);
-        label = new QLabel(widget);
+        label = new QLabel(layoutWidget);
         label->setObjectName(QString::fromUtf8("label"));
         label->setFont(font);
         label->setStyleSheet(QString::fromUtf8(""));
 
         horizontalLayout->addWidget(label);
 
-        userNameLabel = new QLabel(widget);
+        userNameLabel = new QLabel(layoutWidget);
         userNameLabel->setObjectName(QString::fromUtf8("userNameLabel"));
         userNameLabel->setFont(font);
 

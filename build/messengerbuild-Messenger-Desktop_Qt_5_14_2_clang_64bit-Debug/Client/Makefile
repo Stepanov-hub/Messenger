@@ -709,7 +709,6 @@ qrc_resource.cpp: ../../../Messenger/Client/resource.qrc \
 		../../../Messenger/Client/img/cat3.jpg \
 		../../../Messenger/Client/img/cat2.jpg \
 		../../../Messenger/Client/img/panda.jpg \
-		../../../Messenger/Client/img/cat.jpg \
 		../../../Messenger/Client/img/background.jpg
 	/Users/kremenevskiy/Apps/Qt/5.14.2/clang_64/bin/rcc -name resource ../../../Messenger/Client/resource.qrc -o qrc_resource.cpp
 

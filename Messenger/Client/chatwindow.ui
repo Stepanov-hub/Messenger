@@ -240,7 +240,7 @@ width: 40px;</string>
      <rect>
       <x>495</x>
       <y>5</y>
-      <width>58</width>
+      <width>75</width>
       <height>16</height>
      </rect>
     </property>
@@ -305,7 +305,7 @@ width: 40px;</string>
      <string>Change ⚙️</string>
     </property>
    </widget>
-   <widget class="QWidget" name="">
+   <widget class="QWidget" name="layoutWidget">
     <property name="geometry">
      <rect>
       <x>10</x>
