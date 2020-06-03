@@ -8,10 +8,11 @@ ChatWindow::ChatWindow(QWidget *parent)
 	, chatModel(new QStandardItemModel(this))
 {
 	ui->setupUi(this);
-	setFixedSize(579, 425);
+	setFixedSize(579, 410);
 
 	ui->disconnectButton->setVisible(false);
 
+	ui->chatView->setEnabled(false);
 	ui->messageEdit->setEnabled(false);
 	ui->sendButton->setEnabled(false);
 	ui->changeNameButton->setEnabled(false);
@@ -145,6 +146,7 @@ void ChatWindow::loggedIn(){
 void ChatWindow::messageReceived(const QString &sender, const QString &text, const QString &time){
 
 	int newRow = chatModel->rowCount();
+	QColor color(0, 0, 0);
 
 	if(sender != lastUserName){
 		lastUserName = sender;
@@ -156,6 +158,7 @@ void ChatWindow::messageReceived(const QString &sender, const QString &text, con
 		chatModel->insertRows(newRow, 2);
 
 		chatModel->setData(chatModel->index(newRow, 0), sender + ':');
+		chatModel->setData(chatModel->index(newRow, 0), QBrush(color), Qt::ForegroundRole);
 
 		chatModel->setData(chatModel->index(newRow, 0), int(Qt::AlignLeft | Qt::AlignVCenter), Qt::TextAlignmentRole);
 
@@ -166,6 +169,7 @@ void ChatWindow::messageReceived(const QString &sender, const QString &text, con
 		QFont boldFon2;
 		boldFon2.setPointSize(6);
 		chatModel->setData(chatModel->index(newRow, 0), time);
+		chatModel->setData(chatModel->index(newRow, 0), QBrush(color), Qt::ForegroundRole);
 		chatModel->setData(chatModel->index(newRow, 0), boldFon2, Qt::FontRole);
 		chatModel->setData(chatModel->index(newRow, 0), int(Qt::AlignLeft | Qt::AlignBottom), Qt::TextAlignmentRole);
 		newRow++;
@@ -181,13 +185,16 @@ void ChatWindow::messageReceived(const QString &sender, const QString &text, con
 		QFont boldFont;
 		boldFont.setPointSize(6);
 		chatModel->setData(chatModel->index(newRow, 0), time);
+		chatModel->setData(chatModel->index(newRow, 0), QBrush(color), Qt::ForegroundRole);
 		chatModel->setData(chatModel->index(newRow, 0), boldFont, Qt::FontRole);
 		chatModel->setData(chatModel->index(newRow, 0), int(Qt::AlignLeft | Qt::AlignBottom), Qt::TextAlignmentRole);
 		newRow++;
 		chatModel->insertRow(newRow);
 	}
 
+	QFont normalFont;
 	chatModel->setData(chatModel->index(newRow, 0), text);
+	chatModel->setData(chatModel->index(newRow, 0), QBrush(color), Qt::ForegroundRole);
 	chatModel->setData(chatModel->index(newRow, 0), int(Qt::AlignLeft | Qt::AlignTop), Qt::TextAlignmentRole);
 
 	ui->chatView->scrollToBottom();
@@ -202,15 +209,19 @@ void ChatWindow::sendMessage(){
 
 	QString time = QTime::currentTime().toString("hh:mm");
 	int newRow = chatModel->rowCount();
+	QColor color(0, 0, 0);
 
 	if (time != myLastMinuteMessage){
 
 		myLastMinuteMessage = time;
 
+
 		chatModel->insertRows(newRow, 2);
 		QFont smallFont;
+
 		smallFont.setPointSize(6);
 		chatModel->setData(chatModel->index(newRow, 0), time);
+		chatModel->setData(chatModel->index(newRow, 0), QBrush(color), Qt::ForegroundRole);
 		chatModel->setData(chatModel->index(newRow, 0), smallFont, Qt::FontRole);
 		chatModel->setData(chatModel->index(newRow, 0), int(Qt::AlignRight | Qt::AlignBottom), Qt::TextAlignmentRole);
 		newRow++;
@@ -223,6 +234,7 @@ void ChatWindow::sendMessage(){
 	client->sendMessage(ui->messageEdit->text(), time);
 
 	chatModel->setData(chatModel->index(newRow, 0), ui->messageEdit->text());
+	chatModel->setData(chatModel->index(newRow, 0), QBrush(color), Qt::ForegroundRole);
 	chatModel->setData(chatModel->index(newRow, 0), int(Qt::AlignRight | Qt::AlignVCenter), Qt::TextAlignmentRole);
 
 	ui->messageEdit->clear();
@@ -330,7 +342,7 @@ void ChatWindow::userChangedName(const QString &oldName, const QString &newName)
 
 	chatModel->insertRow(newRow);
 
-	chatModel->setData(chatModel->index(newRow, 0), tr("Be carefull! User <%1> changed name to <%2>").arg(oldName).arg(newName));
+	chatModel->setData(chatModel->index(newRow, 0), tr("Be careful ! User <%1> changed name to <%2>").arg(oldName).arg(newName));
 	chatModel->setData(chatModel->index(newRow, 0), Qt::AlignCenter, Qt::TextAlignmentRole);
 	QColor color(255, 0, 204);
 	chatModel->setData(chatModel->index(newRow, 0), QBrush(color), Qt::ForegroundRole);

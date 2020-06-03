@@ -13,12 +13,106 @@
   <property name="windowTitle">
    <string>Dialog</string>
   </property>
+  <property name="styleSheet">
+   <string notr="true">/*-----QLineEdit-----*/
+QLineEdit
+{
+	
+	selection-background-color: darkgray;
+	background-color: #131313;
+	color : #eee;
+	border: 1px solid #343434;
+	border-radius: 4px;
+	padding: 3px;
+	padding-left: 5px;
+
+}
+
+
+QLineEdit:disabled
+{
+	background-color: rgb(47, 49, 49);
+	color : rgb(150, 148, 152)
+
+}
+
+/*-----QSpinBox &amp; QDateTimeEdit-----*/
+QSpinBox
+{
+    selection-background-color: darkgray;
+	background-color: #131313;
+	color : #eee;
+	border: 1px solid #343434;
+	border-radius: 4px;
+	padding: 3px;
+	padding-left: 5px;
+
+}
+
+QSpinBox:disabled
+{
+    background-color: rgb(47, 49, 49);
+	color : rgb(150, 148, 152);
+}
+
+QSpinBox::up-button
+{
+	border-top-right-radius:2px;
+	background-color: #777777;
+    width: 16px; 
+    border-width: 1px;
+
+}
+
+
+QSpinBox::up-button:hover
+{
+	background-color: #585858;
+
+}
+
+
+QSpinBox::up-button:pressed
+{
+	background-color: #252525;
+    width: 16px; 
+    border-width: 1px;
+
+}
+
+
+QSpinBox::down-button
+{
+	border-bottom-right-radius:2px;
+	background-color: rgb(182, 179, 184);
+    width: 16px; 
+    border-width: 1px;
+
+}
+
+
+QSpinBox::down-button:hover
+{
+	background-color: #585858;
+
+}
+
+
+QSpinBox::down-button:pressed
+{
+	background-color: #252525;
+    width: 16px; 
+    border-width: 1px;
+
+}
+</string>
+  </property>
   <widget class="QWidget" name="layoutWidget">
    <property name="geometry">
     <rect>
      <x>10</x>
      <y>70</y>
-     <width>221</width>
+     <width>229</width>
      <height>83</height>
     </rect>
    </property>
@@ -136,7 +230,7 @@
     <rect>
      <x>10</x>
      <y>30</y>
-     <width>86</width>
+     <width>94</width>
      <height>22</height>
     </rect>
    </property>
@@ -150,7 +244,7 @@
   <widget class="QPushButton" name="OkButton">
    <property name="geometry">
     <rect>
-     <x>169</x>
+     <x>160</x>
      <y>10</y>
      <width>71</width>
      <height>24</height>
@@ -163,7 +257,7 @@
   <widget class="QPushButton" name="cancelButton">
    <property name="geometry">
     <rect>
-     <x>170</x>
+     <x>160</x>
      <y>40</y>
      <width>71</width>
      <height>24</height>
