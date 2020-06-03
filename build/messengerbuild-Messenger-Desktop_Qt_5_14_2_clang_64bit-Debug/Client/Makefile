@@ -55,13 +55,15 @@ OBJECTS_DIR   = ./
 SOURCES       = ../../../Messenger/Client/chatclient.cpp \
 		../../../Messenger/Client/connectiondialog.cpp \
 		../../../Messenger/Client/main.cpp \
-		../../../Messenger/Client/chatwindow.cpp moc_chatclient.cpp \
+		../../../Messenger/Client/chatwindow.cpp qrc_resource.cpp \
+		moc_chatclient.cpp \
 		moc_chatwindow.cpp \
 		moc_connectiondialog.cpp
 OBJECTS       = chatclient.o \
 		connectiondialog.o \
 		main.o \
 		chatwindow.o \
+		qrc_resource.o \
 		moc_chatclient.o \
 		moc_chatwindow.o \
 		moc_connectiondialog.o
@@ -448,6 +450,7 @@ Makefile: ../../../Messenger/Client/Client.pro /Users/kremenevskiy/Apps/Qt/5.14.
 		/Users/kremenevskiy/Apps/Qt/5.14.2/clang_64/mkspecs/features/yacc.prf \
 		/Users/kremenevskiy/Apps/Qt/5.14.2/clang_64/mkspecs/features/lex.prf \
 		../../../Messenger/Client/Client.pro \
+		../../../Messenger/Client/resource.qrc \
 		/Users/kremenevskiy/Apps/Qt/5.14.2/clang_64/lib/QtWidgets.framework/Resources/QtWidgets.prl \
 		/Users/kremenevskiy/Apps/Qt/5.14.2/clang_64/lib/QtGui.framework/Resources/QtGui.prl \
 		/Users/kremenevskiy/Apps/Qt/5.14.2/clang_64/lib/QtNetwork.framework/Resources/QtNetwork.prl \
@@ -631,6 +634,7 @@ Makefile: ../../../Messenger/Client/Client.pro /Users/kremenevskiy/Apps/Qt/5.14.
 /Users/kremenevskiy/Apps/Qt/5.14.2/clang_64/mkspecs/features/yacc.prf:
 /Users/kremenevskiy/Apps/Qt/5.14.2/clang_64/mkspecs/features/lex.prf:
 ../../../Messenger/Client/Client.pro:
+../../../Messenger/Client/resource.qrc:
 /Users/kremenevskiy/Apps/Qt/5.14.2/clang_64/lib/QtWidgets.framework/Resources/QtWidgets.prl:
 /Users/kremenevskiy/Apps/Qt/5.14.2/clang_64/lib/QtGui.framework/Resources/QtGui.prl:
 /Users/kremenevskiy/Apps/Qt/5.14.2/clang_64/lib/QtNetwork.framework/Resources/QtNetwork.prl:
@@ -664,6 +668,7 @@ dist: distdir FORCE
 distdir: FORCE
 	@test -d $(DISTDIR) || mkdir -p $(DISTDIR)
 	$(COPY_FILE) --parents $(DIST) $(DISTDIR)/
+	$(COPY_FILE) --parents ../../../Messenger/Client/resource.qrc $(DISTDIR)/
 	$(COPY_FILE) --parents /Users/kremenevskiy/Apps/Qt/5.14.2/clang_64/mkspecs/features/data/dummy.cpp $(DISTDIR)/
 	$(COPY_FILE) --parents ../../../Messenger/Client/chatclient.h ../../../Messenger/Client/chatwindow.h ../../../Messenger/Client/connectiondialog.h $(DISTDIR)/
 	$(COPY_FILE) --parents ../../../Messenger/Client/chatclient.cpp ../../../Messenger/Client/connectiondialog.cpp ../../../Messenger/Client/main.cpp ../../../Messenger/Client/chatwindow.cpp $(DISTDIR)/
@@ -694,8 +699,20 @@ check: first
 
 benchmark: first
 
-compiler_rcc_make_all:
+compiler_rcc_make_all: qrc_resource.cpp
 compiler_rcc_clean:
+	-$(DEL_FILE) qrc_resource.cpp
+qrc_resource.cpp: ../../../Messenger/Client/resource.qrc \
+		/Users/kremenevskiy/Apps/Qt/5.14.2/clang_64/bin/rcc \
+		../../../Messenger/Client/img/cat4.jpg \
+		../../../Messenger/Client/img/cat10.jpg \
+		../../../Messenger/Client/img/cat3.jpg \
+		../../../Messenger/Client/img/cat2.jpg \
+		../../../Messenger/Client/img/panda.jpg \
+		../../../Messenger/Client/img/cat.jpg \
+		../../../Messenger/Client/img/background.jpg
+	/Users/kremenevskiy/Apps/Qt/5.14.2/clang_64/bin/rcc -name resource ../../../Messenger/Client/resource.qrc -o qrc_resource.cpp
+
 compiler_moc_predefs_make_all: moc_predefs.h
 compiler_moc_predefs_clean:
 	-$(DEL_FILE) moc_predefs.h
@@ -795,7 +812,7 @@ compiler_yacc_impl_make_all:
 compiler_yacc_impl_clean:
 compiler_lex_make_all:
 compiler_lex_clean:
-compiler_clean: compiler_moc_predefs_clean compiler_moc_header_clean compiler_uic_clean 
+compiler_clean: compiler_rcc_clean compiler_moc_predefs_clean compiler_moc_header_clean compiler_uic_clean 
 
 ####### Compile
 
@@ -860,7 +877,9 @@ main.o: ../../../Messenger/Client/main.cpp ../../../Messenger/Client/chatwindow.
 		/Users/kremenevskiy/Apps/Qt/5.14.2/clang_64/lib/QtWidgets.framework/Headers/QCheckBox \
 		/Users/kremenevskiy/Apps/Qt/5.14.2/clang_64/lib/QtWidgets.framework/Headers/qcheckbox.h \
 		/Users/kremenevskiy/Apps/Qt/5.14.2/clang_64/lib/QtWidgets.framework/Headers/QApplication \
-		/Users/kremenevskiy/Apps/Qt/5.14.2/clang_64/lib/QtWidgets.framework/Headers/qapplication.h
+		/Users/kremenevskiy/Apps/Qt/5.14.2/clang_64/lib/QtWidgets.framework/Headers/qapplication.h \
+		/Users/kremenevskiy/Apps/Qt/5.14.2/clang_64/lib/QtCore.framework/Headers/QFile \
+		/Users/kremenevskiy/Apps/Qt/5.14.2/clang_64/lib/QtCore.framework/Headers/qfile.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o main.o ../../../Messenger/Client/main.cpp
 
 chatwindow.o: ../../../Messenger/Client/chatwindow.cpp ../../../Messenger/Client/chatwindow.h \
@@ -899,6 +918,9 @@ chatwindow.o: ../../../Messenger/Client/chatwindow.cpp ../../../Messenger/Client
 		/Users/kremenevskiy/Apps/Qt/5.14.2/clang_64/lib/QtWidgets.framework/Headers/qcheckbox.h \
 		ui_chatwindow.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o chatwindow.o ../../../Messenger/Client/chatwindow.cpp
+
+qrc_resource.o: qrc_resource.cpp 
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o qrc_resource.o qrc_resource.cpp
 
 moc_chatclient.o: moc_chatclient.cpp 
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o moc_chatclient.o moc_chatclient.cpp

@@ -47,9 +47,102 @@ public:
         if (ConnectionDialog->objectName().isEmpty())
             ConnectionDialog->setObjectName(QString::fromUtf8("ConnectionDialog"));
         ConnectionDialog->resize(251, 162);
+        ConnectionDialog->setStyleSheet(QString::fromUtf8("/*-----QLineEdit-----*/\n"
+"QLineEdit\n"
+"{\n"
+"	\n"
+"	selection-background-color: darkgray;\n"
+"	background-color: #131313;\n"
+"	color : #eee;\n"
+"	border: 1px solid #343434;\n"
+"	border-radius: 4px;\n"
+"	padding: 3px;\n"
+"	padding-left: 5px;\n"
+"\n"
+"}\n"
+"\n"
+"\n"
+"QLineEdit:disabled\n"
+"{\n"
+"	background-color: rgb(47, 49, 49);\n"
+"	color : rgb(150, 148, 152)\n"
+"\n"
+"}\n"
+"\n"
+"/*-----QSpinBox & QDateTimeEdit-----*/\n"
+"QSpinBox\n"
+"{\n"
+"    selection-background-color: darkgray;\n"
+"	background-color: #131313;\n"
+"	color : #eee;\n"
+"	border: 1px solid #343434;\n"
+"	border-radius: 4px;\n"
+"	padding: 3px;\n"
+"	padding-left: 5px;\n"
+"\n"
+"}\n"
+"\n"
+"QSpinBox:disabled\n"
+"{\n"
+"    background-color: rgb(47, 49, 49);\n"
+"	color : rgb(150, 148, 152);\n"
+"}\n"
+"\n"
+"QSpinBox::up-button\n"
+"{\n"
+"	border-top-right-radius:2px;\n"
+"	background-color: #777777;\n"
+"    width: 16px; \n"
+"    border-width: 1px;\n"
+"\n"
+"}\n"
+"\n"
+"\n"
+"QSpinBox::up-button:hover\n"
+"{\n"
+"	background-color: #585858;\n"
+"\n"
+"}\n"
+"\n"
+""
+                        "\n"
+"QSpinBox::up-button:pressed\n"
+"{\n"
+"	background-color: #252525;\n"
+"    width: 16px; \n"
+"    border-width: 1px;\n"
+"\n"
+"}\n"
+"\n"
+"\n"
+"QSpinBox::down-button\n"
+"{\n"
+"	border-bottom-right-radius:2px;\n"
+"	background-color: rgb(182, 179, 184);\n"
+"    width: 16px; \n"
+"    border-width: 1px;\n"
+"\n"
+"}\n"
+"\n"
+"\n"
+"QSpinBox::down-button:hover\n"
+"{\n"
+"	background-color: #585858;\n"
+"\n"
+"}\n"
+"\n"
+"\n"
+"QSpinBox::down-button:pressed\n"
+"{\n"
+"	background-color: #252525;\n"
+"    width: 16px; \n"
+"    border-width: 1px;\n"
+"\n"
+"}\n"
+""));
         layoutWidget = new QWidget(ConnectionDialog);
         layoutWidget->setObjectName(QString::fromUtf8("layoutWidget"));
-        layoutWidget->setGeometry(QRect(10, 70, 221, 83));
+        layoutWidget->setGeometry(QRect(10, 70, 229, 83));
         verticalLayout = new QVBoxLayout(layoutWidget);
         verticalLayout->setObjectName(QString::fromUtf8("verticalLayout"));
         verticalLayout->setContentsMargins(0, 0, 0, 0);
@@ -119,14 +212,14 @@ public:
         ipCheckBox->setChecked(true);
         portCheckBox = new QCheckBox(ConnectionDialog);
         portCheckBox->setObjectName(QString::fromUtf8("portCheckBox"));
-        portCheckBox->setGeometry(QRect(10, 30, 86, 22));
+        portCheckBox->setGeometry(QRect(10, 30, 94, 22));
         portCheckBox->setChecked(true);
         OkButton = new QPushButton(ConnectionDialog);
         OkButton->setObjectName(QString::fromUtf8("OkButton"));
-        OkButton->setGeometry(QRect(169, 10, 71, 24));
+        OkButton->setGeometry(QRect(160, 10, 71, 24));
         cancelButton = new QPushButton(ConnectionDialog);
         cancelButton->setObjectName(QString::fromUtf8("cancelButton"));
-        cancelButton->setGeometry(QRect(170, 40, 71, 24));
+        cancelButton->setGeometry(QRect(160, 40, 71, 24));
         line = new QFrame(ConnectionDialog);
         line->setObjectName(QString::fromUtf8("line"));
         line->setGeometry(QRect(0, 70, 260, 3));
