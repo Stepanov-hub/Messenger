@@ -76,12 +76,7 @@ void ChatClient::sendMessage(const QString &text, const QString &time){
 void ChatClient::onReadyRead()
 {
 	QByteArray jsonArray;
-	//clientSocket->flush();
-
 	QDataStream clientStream(clientSocket);
-
-	//clientStream.setVersion(QDataStream::Qt_5_7);
-	int i = 0;
 
 	for(;;){
 		clientStream.startTransaction();
@@ -92,27 +87,13 @@ void ChatClient::onReadyRead()
 			QJsonParseError jsonError;
 			QJsonDocument jsonDoc = QJsonDocument::fromJson(jsonArray, &jsonError);
 
-			if(jsonError.error == QJsonParseError::NoError)
-			{
-				if(jsonDoc.isObject()){
-					//qDebug() << "Object success" << QString::fromUtf8(jsonDoc.toJson());
+			if(jsonError.error == QJsonParseError::NoError)	
+				if(jsonDoc.isObject())
 					jsonReceived(jsonDoc.object());
-				}
-				else{
-					//qDebug() << "json isn't object! " << jsonArray;
-				}
-			}
-			else{
-				//qDebug() << "Error with pasing json: " << jsonError.errorString()
-						 //<< "\n From: " << jsonArray;
-			}
 		}
-		else{
-			// if no more data to read go out from the loop
+		else
 			break;
-		}
 	}
-
 }
 
 
